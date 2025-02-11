@@ -12,6 +12,12 @@ func main() {
 	mux.HandleFunc("GET /bar", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
 	})
+	mux.HandleFunc("GET /query", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Query().Encode()))
+	})
+	mux.HandleFunc("GET /path/{path}", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.PathValue("path")))
+	})
 
 	println(`
                                              ▄▄  
